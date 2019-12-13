@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <ul>
+            <li v-for="good in goodlist" v-bind:key="good.goodName">
+                <span>{{good.goodName}}</span>
+                --<span>{{good.price}}</span>
+                --<span><input type="number" v-model="good.count"/></span>
+                --<span>{{good.price*good.count}}元</span>
+            </li>
+        </ul>
+        <h2>总价为：{{totalprice}}元</h2>
+    </div>
+    <script>
+        var app=new Vue({
+            el:"#app",
+            data:{
+               goodlist:[
+                   {goodName:"花西子口红",price:129 ,count:2},
+                   {goodName:"箫",price:200,count:1},
+                   {goodName:"电钢琴",price:1000,count:1},
+                   {goodName:"汉服",price:550,count:3},
+               ],
+               totalprice:0
+               
+            },
+            // computed:{
+            //     totalprice:function(){
+            //         var result=0;
+            //         for(var i=0;i<this.goodlist.length;i++)
+            //         {
+            //             result+=this.goodlist[i].price*this.goodlist[i].count;
+
+            //         }
+            //         return result;
+            //     }
+            // }
+            watch:{
+                goodlist:{
+                    deep:true,
+                    handler:function(newVal){
+                        //newVal实际上指向了更新后的goodlist
+                        var result=0;
+                        newVal.forEach(function(good,index){
+                            //good代表数组迭代出来的每一个数组元素，index是他的数组索引
+                            result+=good.price*good.count;
+                            
+                        })
+                        this.totalprice=result;
+                    }
+                }
+            }
+           
+        })
+    </script>
+</body>
+</html>

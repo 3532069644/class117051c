@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+       <!-- <h1>{{article.title}}</h1>
+       <h2>作者：{{article.author}}</h2>
+       <h3>{{article.publishDate}}</h3>
+       <p>
+           <img :src="article.imgSrc" />
+            {{article.content}}
+       </p> -->
+       <!-- <guolele></guolele> -->
+       <!-- heart是组件的一个属性，该组件必须通过props声明这个属性 -->
+       <!-- <guolele v-bind:heart="article"></guolele>
+       <guolele v-bind:heart="article2"></guolele> -->
+       <guolele v-for="article in artivleList" :key="article.title" :heart="article"></guolele>
+    </div>
+    <script>
+        //定义guolele这个自定义组件
+        //第一个参数是自定义组件的标签名称，第二个参数是自定义组件的的运行规则对象
+        Vue.component('guolele',{
+            props:['heart'],
+            //template中定义的是组件的模板，也就是html和插值{{}}以及Vue指令的组合
+            //template必须要有根标签，例如<h1></h1><h2></h2>不合法，<div><h1></h1><h2></h2></div>合法
+
+                        template:'<div>'
+                        +'<h1 style="color:red">{{heart.title}}</h1>'
+                        +'<h2>{{heart.author}}</h2>'+'<h3>{{heart.publishDate}}</h3>'
+                        +'<p>{{heart.content}}</p>'
+                        +'<div>'
+        });
+            var app=new Vue({
+                el:"#app",
+                data:{
+                    artivleList:[
+                        {
+                            title:"vue笔记1",
+                        author:"郭乐乐",
+                        publishDate:"2019-12-10",
+                        content:"乔女士和我差不多大，且合我心意。"
+                        },
+                        {
+                            title:"vue笔记",
+                        author:"郭乐乐",
+                        publishDate:"2019-12-10",
+                        content:"乔女士和我差不多大，且合我心意。"
+
+                        },
+                        {
+                            title:"恋爱笔记",
+                        author:"郭乐乐",
+                        publishDate:"2019-12-10",
+                        content:"今天。"
+
+                        },
+                        {
+                            title:"恋爱总结",
+                        author:"郭乐乐",
+                        publishDate:"2019-12-10",
+                        content:"要体贴。"
+
+                        }
+                    ]
+                    // article:{
+                    //     title:"论乔碧萝的真实年龄",
+                    //     author:"郭乐乐",
+                    //     publishDate:"2019-12-10",
+                    //     content:"乔女士和我差不多大，且合我心意。",
+                    //     imgSrc:"https://dss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=3459820774,1016426395&fm=26&gp=0.jpg"
+                    // },
+                    // article2:{
+                    //     title:"vue笔记",
+                    //     author:"郭乐乐",
+                    //     publishDate:"2019-12-10",
+                    //     content:"乔女士和我差不多大，且合我心意。",
+                    //     imgSrc:"https://dss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=3459820774,1016426395&fm=26&gp=0.jpg"
+                    // }
+                 
+                }
+               
+
+            })
+        </script>
+        
+</body>
+</html>
